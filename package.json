@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.2.0",
+  "license": "MIT",
+  "author": "Yuga Sun <yugasun.ai@gmail.com>",
+  "keywords": [
+    "skills",
+    "agent-skills",
+    "agent",
+    "ai"
+  ]
+}
