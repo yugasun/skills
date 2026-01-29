@@ -1,19 +1,19 @@
 # Yuga Sun's Agent Skills
 
-A collection of high-quality, opinionated agent skills for modern full-stack development. These skills are designed to be used with AI agents (like Cursor, Windsurf, or custom agents) to standardize project creation and maintenance.
+A collection of high-quality, opinionated agent skills for modern full-stack development and work automation. These skills are designed to be used with AI agents (like Moltbot/Clawdbot, Cursor, Windsurf, or custom agents) to standardize project creation and maintenance.
 
 ## Installation
 
 ```bash
-# Using pnpm
-pnpx skills add yugasun/skills
+# Using npm
+npx skills add yugasun/skills
 ```
 
 or to install it globally:
 
 ```bash
-# Using pnpm
-pnpx skills add yugasun/skills -g
+# Using npm
+npx skills add yugasun/skills -g
 ```
 
 Learn more about the CLI usage at [skills](https://github.com/vercel-labs/skills).
@@ -47,6 +47,12 @@ Uploads static sites or files to AWS S3 or compatible object storage.
 - **Supports**: AWS S3, MinIO, Aliyun OSS, Tencent COS
 - **Features**: Auto MIME detection, public access config, custom endpoints
 - **Integration**: Works seamlessly with `slides` for publishing
+
+### 🛠️ Skill Creator (`skill-creator`)
+A meta-skill for creating and maintaining high-quality agent skills.
+- **Purpose**: Extend agent capabilities with specialized workflows and tools
+- **Features**: Skill scaffolding, best practices validation, documentation generation
+- **Workflow**: Create custom skills to standardize your team's development process
 
 ## Usage
 
