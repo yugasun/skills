@@ -31,6 +31,10 @@ export const meta = {
     {
       name: 'skill-creator',
       description: 'Automates the creation of new skills based on user-defined specifications',
+    },
+    {
+      name: 's3',
+      description: 'Uploads generated static sites or files to AWS S3 or S3-compatible services',
     }
   ],
 }

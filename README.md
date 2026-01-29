@@ -42,6 +42,12 @@ An interactive, single-file HTML presentation generator.
 - **Format**: Single HTML file with embedded CSS/JS
 - **Features**: Mobile responsiveness, navigation controls, animations
 
+### ☁️ S3 Deployment (`s3`)
+Uploads static sites or files to AWS S3 or compatible object storage.
+- **Supports**: AWS S3, MinIO, Aliyun OSS, Tencent COS
+- **Features**: Auto MIME detection, public access config, custom endpoints
+- **Integration**: Works seamlessly with `slides` for publishing
+
 ## Usage
 
 Once installed, your AI agent will have access to these skills and can reference them to:
