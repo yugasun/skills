@@ -26,7 +26,11 @@ export const meta = {
     },
     {
       name: 'slides',
-      description: 'Generates high-quality, single-file HTML interactive slide decks',
+      description: 'Generates high-quality slides/ppt, with single-file HTML interactive',
     },
+    {
+      name: 'skill-creator',
+      description: 'Automates the creation of new skills based on user-defined specifications',
+    }
   ],
 }

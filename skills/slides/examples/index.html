@@ -1,154 +1,9 @@
----
-name: slides
-description: Generate high-quality, single-file HTML interactive slide decks. Use this skill when the user asks to create a presentation, slide deck, or PPT.
-metadata:
-  author: Yuga Sun
-  version: "2026.01.29"
----
-
-# Interactive HTML Slide Generator
-
-## Instructions
-
-Act as an expert Frontend Developer and Presentation Designer to generate a "Keynote-quality" single-file HTML presentation.
-
-1.  **Analyze Content**: Transform user input into a logical slide outline (8-12 slides).
-2.  **Apply Design**: Use the "Cyberpunk Professional" theme defined below.
-3.  **Visual Assets**: If necessary, use **Nano Banana Pro** to generate high-quality images for slide content.
-4.  **Generate Code**: Output a single `index.html` file containing all CSS, JS, and HTML.
-5.  **Save Output**: Save the file to `slides/<ppt-name>/dist/index.html`.
-
-## Design Philosophy & System
-- **Theme**: "Cyberpunk Professional" / Dark Tech.
-- **Background**: Deep dark background (`#030712`) with subtle animated grid or radial gradients.
-- **Glassmorphism**: Slides use `rgba(17, 24, 39, 0.85)` with `backdrop-filter: blur(20px)` and thin borders.
-- **Typography**:
-  - Headings: 'Space Grotesk' (Google Fonts) - Tech/Modern feel.
-  - Body: 'Inter' (Google Fonts) - Clean/Readable.
-  - Code: 'JetBrains Mono' (Google Fonts) - Developer focus.
-- **Color Palette**:
-  - Background: `#030712` (`--bg-color`)
-  - Primary Accent: Cyan `#06b6d4` (`--accent-primary`)
-  - Secondary Accent: Violet `#8b5cf6` (`--accent-secondary`)
-  - Warning/Highlight: Amber `#f59e0b` (`--accent-warning`)
-  - Text: `#f8fafc` (Main, `--text-main`), `#94a3b8` (Muted, `--text-muted`)
-
-## Technical Requirements
-1. **Output Path & Format**: Output must be a single `index.html` file (containing all CSS/JS) located at `slides/<ppt-name>/dist/index.html`.
-2. **External Assets**: Use CDNs for Fonts (Google Fonts) and Icons (FontAwesome). Images should be Unsplash URLs or placeholders.
-3. **Responsiveness**: Implement the "Scale-to-Fit" logic for mobile devices.
-   - **Desktop**: Single slide view, hidden overflow.
-   - **Mobile (<768px)**: Vertical scrolling list of slides. Each slide is forced to 1280x720 but scaled down (using `transform: scale()`) to fit the screen width, with margin adjustments to remove gaps.
-
-## Mobile Styling Specification
-The generated CSS **must** include this exact media query block to handle the complex scaling logic:
-
-```css
-@media (max-width: 768px) {
-    body {
-        overflow-y: auto !important;
-        height: auto !important;
-        display: block !important;
-        padding: 20px 0;
-        background-attachment: scroll;
-    }
-
-    #deck {
-        width: 100% !important;
-        height: auto !important;
-        max-width: none !important;
-        max-height: none !important;
-        aspect-ratio: auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 0; 
-        padding: 0;
-        align-items: center;
-        overflow: hidden;
-    }
-
-    .slide-container {
-        /* Force visible (Override JS) */
-        position: relative !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: none !important;
-        
-        /* Force Desktop Dimensions */
-        width: 1280px !important;
-        height: 720px !important;
-        min-height: 720px !important;
-        flex-shrink: 0;
-        
-        /* Scale using JS-calculated variable */
-        transform: scale(var(--scale, 0.3)) !important;
-        transform-origin: top center !important;
-        
-        /* Layout Fix: Close the gap caused by scaling */
-        margin-bottom: calc(720px * var(--scale, 0.3) - 720px + 20px) !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        left: auto !important;
-        top: auto !important;
-        
-        border-radius: 24px !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
-    }
-
-    .controls, .progress-bar { 
-        display: none !important; 
-    }
-    
-    .animate-in {
-        opacity: 1 !important;
-        animation: none !important;
-        transform: none !important;
-    }
-}
-```
-
-## Navigation Strategies
-1. **Desktop**: 
-   - Keyboard (Arrow keys, Space).
-   - On-screen buttons (Next/Prev).
-   - Progress bar at the bottom.
-2. **Mobile**:
-   - Native scroll interaction (Vertical list).
-   - Hide controls and progress bar.
-
-## Animations
-Staggered entry animations (`.animate-in`, `.delay-1`, etc.) for elements within a slide.
-
-## Slide Templates
-
-### 1. Structure
-All slides live inside a `#deck` container.
-```html
-<div class="slide-container" id="slideX">
-  <div class="content-area">
-    <!-- Content here -->
-  </div>
-</div>
-```
-
-### 2. Common Layouts
-- **Cover Slide**: Large H1 with gradient text, subtitle, and call-to-action pill.
-- **Split Layout**: `.grid-2` (Left Content / Right Image) for defining concepts.
-- **Tiled Grid**: `.grid-tiled` (2-4 cards) for features/stat cards.
-- **Timeline**: `.timeline` with `.timeline-item` and `.dot` for roadmaps.
-- **Stats**: `.stat-grid` with `.stat-item` and `.num` for data visualization.
-- **Comparison Table**: `.table-container` for pros/cons.
-
-## Boilerplate Code
-Always start with this structure:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentation Title</title>
+    <title>2025 Market Opportunities</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -280,6 +135,7 @@ Always start with this structure:
             overflow: hidden;
             border: 1px solid var(--glass-border);
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            height: 100%;
         }
         .img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
@@ -346,7 +202,64 @@ Always start with this structure:
 </head>
 <body>
     <div id="deck">
-        <!-- Slides go here -->
+        
+        <!-- Slide 1: Cover -->
+        <div class="slide-container active" id="slide1">
+            <div class="content-area" style="position: relative;">
+                <h3 class="mono-accent animate-in"><i class="fa-solid fa-rocket"></i> INVESTOR DECK Q1</h3>
+                <h1 class="animate-in delay-1" style="font-size: 90px; margin: 20px 0;">2025: <br><span class="text-gradient">BEYOND THE HYPE</span></h1>
+                <p class="subtitle animate-in delay-2">Capturing Real Value in the New AI Cycle.</p>
+                
+                <div class="animate-in delay-3" style="margin-top: 50px;">
+                    <div class="pill"><i class="fa-solid fa-play"></i> START PRESENTATION</div>
+                </div>
+
+                <div style="position: absolute; right: 0; bottom: 0; text-align: right;" class="animate-in delay-3">
+                    <p style="font-size: 16px; color: var(--text-muted);">Confidential & Proprietary</p>
+                    <p style="font-size: 16px; color: var(--accent-primary);">Jan 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Hook -->
+        <div class="slide-container" id="slide2">
+            <div class="content-area grid-2">
+                <div>
+                    <h2 class="animate-in">The Turning Point</h2>
+                    <p class="animate-in delay-1">Everyone is talking about uncertainty. We see <span style="color: var(--accent-primary); font-weight: 600;">inevitability</span>.</p>
+                    <p class="animate-in delay-2" style="margin-top: 20px;">
+                        While competitors retreat to "safe" low-margin zones, a massive structural gap has opened in the mid-market application layer.
+                    </p>
+                    <div class="animate-in delay-3" style="margin-top: 30px; padding-left: 20px; border-left: 3px solid var(--accent-warning);">
+                        <p style="font-size: 18px; color: var(--text-main);">"The biggest opportunities are born in the quietest moments of the market."</p>
+                    </div>
+                </div>
+                <div class="img-box animate-in delay-2">
+                    <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2532&auto=format&fit=crop" alt="Abstract Tech Wave">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Q&A / Contact -->
+        <div class="slide-container" id="slide3">
+            <div class="content-area" style="align-items: center; text-align: center;">
+                <h2 class="animate-in" style="font-size: 60px; margin-bottom: 20px;">Q & A</h2>
+                <p class="subtitle animate-in delay-1">Let's build the future of enterprise intelligence.</p>
+
+                <div class="animate-in delay-2"
+                    style="margin-top: 60px; display: flex; flex-direction: column; gap: 20px; align-items: center;">
+                    <a href="mailto:founder@company.com"
+                        style="text-decoration: none; color: white; display: flex; align-items: center; gap: 10px; padding: 15px 30px; background: rgba(255,255,255,0.05); border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); transition: all 0.2s; font-size: 18px;">
+                        <i class="fa-solid fa-envelope" style="color: var(--accent-primary);"></i> founder@company.com
+                    </a>
+                    <a href="#"
+                        style="text-decoration: none; color: white; display: flex; align-items: center; gap: 10px; padding: 15px 30px; background: rgba(255,255,255,0.05); border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); transition: all 0.2s; font-size: 18px;">
+                        <i class="fa-brands fa-linkedin" style="color: var(--accent-secondary);"></i> linkedin.com/in/founder
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- UI -->
@@ -371,7 +284,7 @@ Always start with this structure:
 
         // Navigation Logic
         let currentSlide = 1;
-        const totalSlides = [TOTAL_SLIDES_COUNT];
+        const totalSlides = 9;
         
         function updateUI() {
             document.querySelectorAll('.slide-container').forEach(s => s.classList.remove('active'));
@@ -400,32 +313,3 @@ Always start with this structure:
     </script>
 </body>
 </html>
-```
-
-## Instruction
-When generating slides:
-1.  **Analyze Content**: Break down the user's topic into logical slides (approx 8-12 slides).
-2.  **Select Layouts**: Choose the most appropriate visual layout for each point (e.g., Timeline for history, Tiles for features).
-3.  **Refine Copy**: Use punchy, high-impact headings. Avoid walls of text. Use `span` with colors for emphasis.
-4.  **Final Slide**: The last slide MUST use the specific "Q & A" layout with the author's contact info. Use the following HTML structure:
-    ```html
-    <div class="slide-container" id="slide[LAST_INDEX]">
-        <div class="content-area" style="align-items: center; text-align: center;">
-            <h2 class="animate-in" style="font-size: 60px; margin-bottom: 20px;">Q & A</h2>
-            <p class="subtitle animate-in delay-1">Start building with /speckit today.</p>
-
-            <div class="animate-in delay-2"
-                style="margin-top: 60px; display: flex; flex-direction: column; gap: 20px; align-items: center;">
-                <a href="mailto:yugasun.ai@gmail.com"
-                    style="text-decoration: none; color: white; display: flex; align-items: center; gap: 10px; padding: 10px 20px; background: rgba(255,255,255,0.05); border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); transition: all 0.2s;">
-                    <i class="fa-solid fa-envelope" style="color: var(--accent-primary);"></i> yugasun.ai@gmail.com
-                </a>
-                <a href="https://github.com/yugasun" target="_blank"
-                    style="text-decoration: none; color: white; display: flex; align-items: center; gap: 10px; padding: 10px 20px; background: rgba(255,255,255,0.05); border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); transition: all 0.2s;">
-                    <i class="fa-brands fa-github" style="color: var(--accent-secondary);"></i> github.com/yugasun
-                </a>
-            </div>
-        </div>
-    </div>
-    ```
-5.  **Code It**: Output the full HTML code.
