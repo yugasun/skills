@@ -1,5 +1,5 @@
 ---
-name: modern-backend
+name: backend
 description: Preferred stack for backend services using uv, FastAPI, Python 3.12+, and AI tools
 metadata:
   author: User
