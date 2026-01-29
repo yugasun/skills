@@ -1,31 +1,25 @@
 ---
 name: web
-description: Preferred stack for web projects using Bun, Vite, React 19, and Tailwind 4
+description: Create and manage modern React web applications using Bun, Vite, React 19, Tailwind CSS 4, and shadcn/ui. Use this skill when the user asks to build a frontend, a web app, or modify UI components.
 metadata:
   author: Yuga Sun
-  version: "2026.01.28"
+  version: "2026.01.29"
 ---
 
-# Modern Web Stack Preferences
+# Web Development Skill
 
-This skill covers the preferred tooling, configurations, and best practices for creating web projects in the `web` directory.
+## Instructions
 
-## Quick Summary
+Use this skill to scaffold and maintain web frontend projects in the `web/` directory. Follow the stack preferences and configuration details below.
 
-| Category | Preference |
-|----------|------------|
-| Package Manager | Bun |
-| Runtime | Bun |
-| Framework | React 19 |
-| Build Tool | Vite |
-| Language | TypeScript 5 |
-| Styling | Tailwind CSS 4 |
-| Components | shadcn/ui 3 |
-| State/Routing | TanStack (Query/Router) |
+### Quick Start
 
----
+1.  **Initialize**: Use `bun create vite web --template react-ts`.
+2.  **Install**: `bun install`.
+3.  **Styling**: Configure Tailwind CSS 4.
+4.  **Components**: Initialize `shadcn/ui`.
 
-## Core Stack
+## Core Stack preferences
 
 ### Package Manager & Runtime (Bun)
 

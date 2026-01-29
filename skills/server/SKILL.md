@@ -1,33 +1,25 @@
 ---
-name: backend
-description: Preferred stack for backend services using uv, FastAPI, Python 3.12+, and AI tools
+name: server
+description: Create and manage Python backend services using uv, FastAPI, Pydantic, SQLAlchemy, and AI libraries. Use this skill when the user asks to build a backend, API, or server-side application.
 metadata:
-  author: User
-  version: "2026.01.28"
+  author: Yuga Sun
+  version: "2026.01.29"
 ---
 
-# Modern Backend Stack Preferences
+# Server Development Skill
 
-This skill covers the preferred tooling, configurations, and best practices for creating backend services in the `server` directory.
+## Instructions
 
-## Quick Summary
+Use this skill to scaffold and maintain backend services in the `server/` directory. Follow the stack preferences and configuration details below.
 
-| Category | Preference |
-|----------|------------|
-| Package Manager | uv |
-| Language | Python 3.12+ |
-| Web Framework | FastAPI |
-| ASGI Server | Uvicorn |
-| Validation | Pydantic v2 |
-| Configuration | Pydantic Settings |
-| Database | SQLAlchemy (Async) |
-| Migrations | Alembic |
-| LLM Integration | LiteLLM |
-| Document Parsing | Docling |
+### Quick Start
 
----
+1.  **Initialize**: `uv init`.
+2.  **Manager**: Use `uv` for all dependency operations.
+3.  **Framework**: Setup `FastAPI` with `Pydantic`.
+4.  **Database**: configure `SQLAlchemy` (Async) + `Alembic`.
 
-## Core Stack
+## Core Stack Preferences
 
 ### Project Management (uv)
 

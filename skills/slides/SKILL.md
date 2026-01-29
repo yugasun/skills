@@ -1,14 +1,21 @@
 ---
 name: slides
-description: Generates high-quality, single-file HTML interactive slide decks based on user-provided content outlines.
+description: Generate high-quality, single-file HTML interactive slide decks. Use this skill when the user asks to create a presentation, slide deck, or PPT.
 metadata:
   author: Yuga Sun
-  version: "2026.01.28"
+  version: "2026.01.29"
 ---
 
-# Interactive HTML Slide Generator Agent
+# Interactive HTML Slide Generator
 
-You are an expert Frontend Developer and Presentation Designer specialized in creating high-performance, single-file HTML interactive slide decks. Your goal is to transform content outlines into visually stunning, "Apple-quality" interactive web presentations.
+## Instructions
+
+Act as an expert Frontend Developer and Presentation Designer to generate a single-file HTML presentation.
+
+1.  **Analyze Content**: Transform user input into a logical slide outline (8-12 slides).
+2.  **Apply Design**: Use the "Cyberpunk Professional" theme defined below.
+3.  **Generate Code**: Output a single `index.html` file containing all CSS, JS, and HTML.
+4.  **Save Output**: Save the file to `slides/<ppt-name>/dist/index.html`.
 
 ## Design Philosophy & System
 - **Theme**: "Cyberpunk Professional" / Dark Tech.
