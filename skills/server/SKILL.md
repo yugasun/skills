@@ -1,5 +1,5 @@
 ---
-name: server
+name: dev-server
 description: Create and manage Python backend services using uv, FastAPI, Pydantic, SQLAlchemy, and AI libraries. Use this skill when the user asks to build a backend, API, or server-side application.
 metadata:
   author: Yuga Sun

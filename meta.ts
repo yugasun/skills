@@ -17,11 +17,11 @@ export const meta = {
    */
   skills: [
     {
-      name: 'web',
+      name: 'dev-web',
       description: 'Preferred stack for web projects using Bun, Vite, React 19, and Tailwind 4',
     },
     {
-      name: 'server',
+      name: 'dev-server',
       description: 'Preferred stack for backend services using uv, FastAPI, Python 3.12+, and AI tools',
     },
     {

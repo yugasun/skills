@@ -1,5 +1,5 @@
 ---
-name: web
+name: dev-web
 description: Create and manage modern React web applications using Bun, Vite, React 19, Tailwind CSS 4, and shadcn/ui. Use this skill when the user asks to build a frontend, a web app, or modify UI components.
 metadata:
   author: Yuga Sun

@@ -21,7 +21,7 @@ Learn more about the CLI usage at [skills](https://github.com/vercel-labs/skills
 
 ## Available Skills
 
-### 🌐 Web (`web`)
+### 🌐 Web (`dev-web`)
 A modern, high-performance frontend stack.
 - **Runtime**: [Bun](https://bun.sh)
 - **Framework**: React 19 + Vite
@@ -29,7 +29,7 @@ A modern, high-performance frontend stack.
 - **Styling**: Tailwind CSS 4 + shadcn/ui 3
 - **State**: TanStack Query & Router
 
-### 🖥️ Server (`server`)
+### 🖥️ Server (`dev-server`)
 A robust, async Python backend stack.
 - **Manager**: [uv](https://github.com/astral-sh/uv)
 - **Framework**: FastAPI (Python 3.12+)
