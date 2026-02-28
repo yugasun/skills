@@ -21,6 +21,7 @@ This skill provides workflows and tools to collect, filter, and summarize the la
 When a user requests a daily AI news summary, follow this process:
 
 1. **Information Gathering**:
+   - MUST RESTRICT SEARCH TO THE LAST 7 DAYS. Use explicit date filters (e.g., in `curl` or `web_search`) to ensure no news or repositories older than one week are included.
    - Use the web search tool to find the current GitHub trending repositories (filter by spoken language or programming language like Python/Jupyter Notebook).
    - Search for recent AI news using queries like "AI news today", "latest artificial intelligence developments", or specific topics (e.g., "OpenAI news", "new LLM releases").
    - If applicable and accessible, search for trending AI discussions on X (Twitter).
@@ -28,11 +29,13 @@ When a user requests a daily AI news summary, follow this process:
 2. **Filtering & Curation**:
    - Filter out noise and generic news.
    - Focus on: New model releases, significant open-source projects, major industry announcements, breakthrough research, and trending developer tools.
+   - STRICTLY exclude any items older than 7 days.
 
 3. **Formatting the Digest**:
    - Use the template provided in `references/digest-template.md` to structure the output.
    - Group items logically (e.g., Open Source & GitHub, Industry News, Research & Papers).
-   - Provide brief, 1-2 sentence summaries for each item, including links where available.
+   - Provide brief, 1-2 sentence summaries for each item.
+   - **MANDATORY**: Every single news item, repository, paper, or tweet MUST include its original source URL as a markdown link `[Link](url)`.
 
 ### 2. Deep Dive on a Specific AI Topic
 
@@ -40,13 +43,14 @@ If the user asks for news about a specific sub-field (e.g., "What's new in AI im
 
 1. Adjust search queries to focus strictly on that niche.
 2. Structure the response to highlight the most impactful recent developments in that specific area.
+3. Ensure all links and 7-day time limits are strictly applied.
 
 ## Best Practices
 
-- **Freshness**: Always verify that the news or repositories are actually recent (within the last 24-48 hours unless otherwise specified).
+- **Freshness (Critical)**: Always verify that the news or repositories are actually recent (Strictly within the last 7 days). Discard anything older.
 - **Conciseness**: Avoid long articles; extract the core value proposition of a new tool or the main takeaway of a news item.
 - **Categorization**: Well-organized digests are much easier to read than flat lists.
-- **Citations**: Always include URLs to the original source (GitHub repo, news article, or tweet).
+- **Citations (Critical)**: Always include URLs to the original source (GitHub repo, news article, or tweet). A report item without a source link is considered invalid.
 
 ## Available Resources
 
