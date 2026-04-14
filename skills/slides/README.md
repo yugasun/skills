@@ -17,9 +17,9 @@ This skill allows the agent to act as an expert Frontend Developer and Presentat
 
 When asking the agent to create slides, you can specify a theme or style. The agent will:
 
-1.  **Select a Theme**: Based on your description (Cyberpunk, Corporate, Minimal, Nature).
-2.  **Generate Content**: Structure your request into a logical slide outline.
-3.  **Assemble**: Inject content, styles, and scripts into the HTML template.
+1. **Select a Theme**: Based on your description (Cyberpunk, Corporate, Minimal, Nature). If no theme is specified, it will default to Cyberpunk.
+2. **Generate Content**: Structure your request into a logical slide outline.
+3. **Assemble**: Inject content, styles, and scripts into the HTML template.
 
 ## Available Themes
 
@@ -33,7 +33,7 @@ When asking the agent to create slides, you can specify a theme or style. The ag
 - `SKILL.md`: The main skill definition and instructions for the agent.
 - `examples/`: Example output to demonstrate capabilities.
 - `templates/`:
-    - `template.html`: The base HTML structure.
-    - `scripts.js`: The client-side logic for the slides.
-    - `layouts.md`: Definitions of available slide layouts.
+  - `template.html`: The base HTML structure.
+  - `scripts.js`: The client-side logic for the slides.
+  - `layouts.md`: Definitions of available slide layouts.
 - `themes/`: CSS files for the different visual themes.
