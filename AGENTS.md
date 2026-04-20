@@ -1,248 +1,58 @@
-# Skills Generator
+# AGENTS.md
 
-Generate [Agent Skills](https://agentskills.io/home) from project documentation with Yuga Sun's preferences.
+This repository publishes reusable agent skills. Most changes should stay local to one skill package under [skills/](skills).
 
-- Focus on agents capabilities and practical usage patterns. For user-facing guides, introductions, get-started, install guide, or common knowledge that LLM agents already know, you can skip those content.
+## Repository Focus
 
-## Skill Source Types
+- Published skills live in [skills/](skills).
+- The skill catalog lives in [docs/available-skills.md](docs/available-skills.md).
+- The minimal new-skill template is [template/SKILL.md](template/SKILL.md).
+- The spec pointer is [spec/agent-skills-spec.md](spec/agent-skills-spec.md).
 
-There are two types of skill sources. The project lists are defined in `meta.ts`:
+## Working Model
 
-### Type 1: Generated Skills (`sources/`)
+- Treat each folder under [skills/](skills) as a self-contained package.
+- Keep changes scoped to the target skill unless you are intentionally updating shared docs.
+- Prefer linking to existing docs over duplicating long guidance into `SKILL.md`.
+- Put executable helpers in `scripts/`, long-form supporting docs in `references/`, and verification in `tests/` when a skill ships non-trivial code.
 
-For OSS projects **without existing skills**. We clone the repo as a submodule and generate skills from their documentation.
+## When Adding Or Updating A Skill
 
-- **Projects:** Vue, Nuxt, Vite, UnoCSS
-- **Workflow:** Read docs → Understand → Generate skills
-- **Source:** `sources/{project}/docs/`
+1. Create or update `skills/<name>/SKILL.md` under [skills/](skills).
+2. Keep the frontmatter valid:
+   - `name`: hyphen-case only, max 64 chars.
+   - `description`: explicit trigger guidance, usually starting with `Use when...`.
+   - Allowed top-level keys are limited by the validator; do not invent extra frontmatter fields.
+3. Keep `SKILL.md` concise. Put reference material in `references/` and link to it.
+4. If the skill has scripts or behavior worth regression coverage, add or update tests inside that skill folder.
+5. Update [docs/available-skills.md](docs/available-skills.md) when a skill is added, removed, or its positioning materially changes.
+6. Leave [README.md](README.md) alone unless project-level positioning, installation, or top-level navigation changed.
 
-### Type 2: Synced Skills (`vendor/`)
+## Validation Commands
 
-For projects that **already maintain their own skills**. We clone their repo as a submodule and sync specified skills to ours.
+Run from the repo root:
 
-- **Projects:** Slidev, VueUse
-- **Workflow:** Pull updates → Copy specified skills (with optional renaming)
-- **Source:** `vendor/{project}/skills/{skill-name}/`
-- **Config:** Each vendor specifies which skills to sync and their output names in `meta.ts`
-
-### Type 3: Hand-written Skills
-
-For skills that are written by Yuga Sun with his preferences, experience, tastes and best practices.
-
-You don't need to do anything about them unless being asked.
-
-## Repository Structure
-
-```
-.
-├── meta.ts                     # Project metadata (repos & URLs)
-├── instructions/               # Instructions for generating skills
-│   └── {project}.md            # Instructions for generating skills for {project}
-│ 
-├── sources/                    # Type 1: OSS repos (generate from docs)
-│   └── {project}/
-│       └── docs/               # Read documentation from here
-│
-├── vendor/                     # Type 2: Projects with existing skills (sync only)
-│   └── {project}/
-│       └── skills/
-│           └── {skill-name}/   # Individual skills to sync
-│
-└── skills/                     # Output directory (generated or synced)
-    └── {output-name}/
-        ├── SKILL.md           # Index of all skills
-        ├── GENERATION.md       # Tracking metadata (for generated skills)
-        ├── SYNC.md             # Tracking metadata (for synced skills)
-        └── references/
-            └── *.md            # Individual skill files
+```bash
+python skills/skill-creator/scripts/quick_validate.py skills/<skill-name>
+python skills/skill-creator/scripts/package_skill.py skills/<skill-name> ./dist
 ```
 
-**Important:** For Type 1 (generated), the `skills/{project}/` name must match `sources/{project}/`. For Type 2 (synced), the output name is configured in `meta.ts` and may differ from the source skill name.
+If the target skill includes tests, run the narrowest relevant test command as well, for example:
 
-## Workflows
-
-### For Generated Skills (Type 1)
-
-#### Adding a New Project
-
-1. **Add entry to `meta.ts`** in the `submodules` object:
-   ```ts
-   export const submodules = {
-     // ... existing entries
-     'new-project': 'https://github.com/org/repo',
-   }
-   ```
-
-2. **Run sync script** to clone the submodule:
-   ```bash
-   nr start init -y
-   ```
-   This will clone the repository to `sources/{project}/`
-
-3. **Follow the generation guide** below to create the skills
-
-#### General Instructions for Generation
-
-- Focus on agents capabilities and practical usage patterns. For user-facing guides, introductions, get-started, or common knowledge that LLM agents already know, you can skip those content.
-- Categorize each references into `core`, `features`, `best-practices`, `advanced`, etc categories, and prefix the reference file name with the category. For each feature field, feel free to create more categories if needed to better organize the content.
-
-#### Creating New Skills
-
-- **Read** source docs from `sources/{project}/docs/`
-- **Read** the instructions in `instructions/{project}.md` for specific generation instructions if exists
-- **Understand** the documentation thoroughly
-- **Create** skill files in `skills/{project}/references/`
-- **Create** `SKILL.md` index listing all skills
-- **Create** `GENERATION.md` with the source git SHA
-
-#### Updating Generated Skills
-
-1. **Check** git diff since the SHA recorded in `GENERATION.md`:
-   ```bash
-   cd sources/{project}
-   git diff {old-sha}..HEAD -- docs/
-   ```
-2. **Update** affected skill files based on changes
-3. **Update** `SKILL.md` with the new version of the tool/project and skills table.
-4. **Update** `GENERATION.md` with new SHA
-
-### For Synced Skills (Type 2)
-
-#### Initial Sync
-
-1. **Copy** specified skills from `vendor/{project}/skills/{skill-name}/` to `skills/{output-name}/`
-2. **Create** `SYNC.md` with the vendor git SHA
-
-#### Updating Synced Skills
-
-1. **Check** git diff since the SHA recorded in `SYNC.md`:
-   ```bash
-   cd vendor/{project}
-   git diff {old-sha}..HEAD -- skills/{skill-name}/
-   ```
-2. **Copy** changed files from `vendor/{project}/skills/{skill-name}/` to `skills/{output-name}/`
-3. **Update** `SYNC.md` with new SHA
-
-**Note:** Do NOT modify synced skills manually. Changes should be contributed upstream to the vendor project.
-
-## File Formats
-
-### `SKILL.md`
-
-Index file listing all skills with brief descriptions:
-
-The version should be the date of the last sync.
-
-Also record the version of the tool/project when the skills were generated.
-
-```markdown
----
-name: {name}
-description: {description}
-metadata:
-  author: Yuga Sun
-  version: "2025.1.1"
-  source: Generated from {source-url}, scripts located at https://github.com/yugasun/skills
----
-
-> The skill is based on {project} v{version}, generated at {date}.
-
-// Some concise summary/context/introduction of the project
-
-## Core References
-
-| Topic | Description | Reference |
-|-------|-------------|-----------|
-| Markdown Syntax | Slide separators, frontmatter, notes, code blocks | [core-syntax](references/core-syntax.md) |
-| Animations | v-click, v-clicks, motion, transitions | [core-animations](references/core-animations.md) |
-| Headmatter | Deck-wide configuration options | [core-headmatter](references/core-headmatter.md) |
-
-## Features
-
-### Feature a
-
-| Topic | Description | Reference |
-|-------|-------------|-----------|
-| Feature A Editor | Description of feature a | [feature-a](references/feature-a-foo.md) |
-| Feature A Preview | Description of feature b | [feature-b](references/feature-a-bar.md) |
-
-### Feature b
-
-| Topic | Description | Reference |
-|-------|-------------|-----------|
-| Feature B | Description of feature b | [feature-b](references/feature-b-bar.md) |
-
-// ...
+```bash
+pytest skills/<skill-name>/tests
 ```
 
-### `GENERATION.md`
+## Useful Local Examples
 
-Tracking metadata for generated skills (Type 1):
+- [skills/blog-writer/SKILL.md](skills/blog-writer/SKILL.md): minimal instruction-only skill.
+- [skills/dev-web/SKILL.md](skills/dev-web/SKILL.md): skill with linked references.
+- [skills/aliyun-image-gen/SKILL.md](skills/aliyun-image-gen/SKILL.md): skill with scripts and tests.
+- [skills/slides/](skills/slides): skill with bundled templates and themes.
 
-```markdown
-# Generation Info
+## Pitfalls To Avoid
 
-- **Source:** `sources/{project}`
-- **Git SHA:** `abc123def456...`
-- **Generated:** 2024-01-15
-```
-
-### `SYNC.md`
-
-Tracking metadata for synced skills (Type 2):
-
-```markdown
-# Sync Info
-
-- **Source:** `vendor/{project}/skills/{skill-name}`
-- **Git SHA:** `abc123def456...`
-- **Synced:** 2024-01-15
-```
-
-### `references/*.md`
-
-Individual skill files. One concept per file.
-
-At the end of the file, include the reference links to the source documentation.
-
-```markdown
----
-name: {name}
-description: {description}
----
-
-# {Concept Name}
-
-Brief description of what this skill covers.
-
-## Usage
-
-Code examples and practical patterns.
-
-## Key Points
-
-- Important detail 1
-- Important detail 2
-
-<!--
-Source references:
-- {source-url}
-- {source-url}
-- {source-url}
--->
-```
-
-## Writing Guidelines
-
-When generating skills (Type 1 only):
-
-1. **Rewrite for agents** - Don't copy docs verbatim; synthesize for LLM consumption
-2. **Be practical** - Focus on usage patterns and code examples
-3. **Be concise** - Remove fluff, keep essential information
-4. **One concept per file** - Split large topics into separate skill files
-5. **Include code** - Always provide working code examples
-6. **Explain why** - Not just how to use, but when and why
-
-## Supported Projects
-
-See `meta.ts` for the canonical list of projects and their repository URLs.
+- Do not add extra documentation files inside a skill when `SKILL.md`, `references/`, or existing docs already cover the need.
+- Do not move shared project guidance into individual skills.
+- Do not update the catalog for internal script-only refactors unless the skill's public positioning changed.
+- Do not hardcode secrets in scripts or examples; use environment variables and document them in the skill.
