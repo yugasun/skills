@@ -1,333 +1,316 @@
 ---
 name: blog-writer
-description: Use when writing AI architecture technical blogs, agent framework analyses, or tool deep dives that need strong judgment, practical examples, and selective use of Mermaid diagrams, tables, prompts, or code.
+description: Write long-form Chinese technical blog posts about AI architecture, agent frameworks, tools, protocols, and implementation tradeoffs. Use when the user wants a deep article, architecture analysis, tool deep dive, or blog draft that should combine judgment, examples, Mermaid diagrams, tables, source links, and optional article illustrations.
 metadata:
   hermes:
     tags: [blog-writing, technical-article, ai-architecture]
 ---
 
-# Blog Writer — AI 架构技术博客
+# Blog Writer
+
+## Overview
+
+Write long-form, judgment-heavy technical blog posts. Start from one real question, make one defensible thesis, and use diagrams, tables, code, prompts, and illustrations only when they improve understanding.
+
+For this blog repository, default to a personal technical-blog voice with clear author judgment. The article should feel like an engineer thinking something through in public, not a neutral lecture note, SEO article, or polished "standard answer".
+
+Default expectations:
+
+- Use Chinese unless the user asks otherwise.
+- Deliver a complete article, not a loose outline, unless the user explicitly asks for a brief.
+- Explain why a design or tool matters, not just what it is.
+- Preserve source links when external material is used.
 
 ## When to Use
 
-- 写 AI / Agent 框架分析文章
-- 写偏架构判断的技术博客
-- 写工具、协议、工作流的深度拆解
-- 写需要结合代码、表格、Mermaid、Prompt 与设计分析的技术文章
+- AI or Agent framework architecture analysis
+- Tool, protocol, runtime, or workflow deep dives
+- Architecture commentary with tradeoff analysis
+- Implementation articles that need code, prompts, Mermaid, or tables
+- Blog drafts that may need cover or section illustrations tied to the article thesis
 
-## Writing Workflow
+Do not use this skill for:
 
-1. **先读资料，再决定写法**
-    - 阅读源码、官方文档、发布说明、示例项目或相关文章。
-    - 先提炼文章真正要回答的 1 个核心问题，再开始写。
-2. **先判断文章模式**
-    - 在起草前先判断更接近“架构解读型 / 工具上手型 / 方案实践型 / 对比分析型”。
-3. **提炼主论点**
-    - 用一句话说明文章的核心判断，例如“X 真正的价值在于 Y，而不是 Z”。
-4. **决定需要哪些材料**
-    - 流程或结构不易解释时用 Mermaid。
-    - 对比、演进、选型优先用表格。
-    - 代码、Prompt、接口定义只在能支撑论点时出现。
-5. **生成大纲再写正文**
-    - 默认按“为什么写 -> 问题是什么 -> 核心机制 -> 实践/示例 -> 取舍/边界 -> 总结”展开。
-    - 默认写成长文，而不是短评或提纲式说明。
-    - 先确保每个一级章节都能展开成足够完整的论述，再开始起草正文。
-6. **做一次成稿自检**
-    - 检查是否真的解释了 why，是否保留了资料来源，是否为了形式强加图表或场景块。
+- Short announcements or release notes
+- Marketing copy or hype-driven landing page text
+- Pure API reference extraction with no editorial judgment
+
+## Deliverables
+
+Every finished article should include:
+
+1. A one-sentence core thesis that is captured in working notes and fully reflected in the article's introduction and conclusion
+2. A structure matched to the article mode
+3. Supporting material only where it adds clarity: Mermaid, tables, code, prompts, or images
+4. A closing judgment with scope, tradeoffs, or recommendations
+5. A `## 参考资料` section when external sources were used
+6. A completed illustration decision in the workflow, if relevant to the article
+
+Publishable blog Markdown should not include workflow-only scaffolding such as `- core_thesis:` or `## Illustration Decision` unless the user explicitly asks to keep those blocks in the final article.
+
+## Final Delivery Format
+
+The final publishable blog post must contain only reader-facing content:
+
+- frontmatter
+- optional image embeds that are meant to appear in the article
+- body sections and subsections
+- Mermaid diagrams, tables, code blocks, and quotes that are part of the article itself
+- a `## 参考资料` section when sources are used
+
+The final publishable blog post must not contain workflow artifacts such as:
+
+- `- core_thesis:` bullets
+- `## Illustration Decision`
+- illustration briefs or generation plans
+- self-review checklists
+- “deliverables”, “workflow”, or other meta process notes
+- any instruction text aimed at the agent rather than the reader
+
+## Final Output Checklist
+
+Before handing off a publishable article, verify these four rules:
+
+- final Markdown contains only reader-facing content
+- thesis is expressed in prose, not as a standalone `- core_thesis:` bullet
+- illustration decisions, briefs, and checklists are removed from the publishable article
+- article ends with real closing judgment and `## 参考资料` when sources were used
+
+## Smoke Cases
+
+Use the regression notes in `tmp-smoke/20260422-publishable-output/` when you need a quick pressure test after changing this skill. The two minimum cases are:
+
+- a plain publishable article with no illustration workflow leakage
+- a `cover-only` article that keeps the cover embed but removes illustration decision logs and briefs from the final Markdown
+
+## Core Workflow
+
+1. Read the relevant material first: source code, docs, release notes, demos, or prior articles.
+2. Reduce the topic to one core question and one thesis.
+3. Choose the article mode before drafting.
+4. Outline around this default spine: why now, problem, mechanism, practice, tradeoffs, conclusion.
+5. Write a complete long-form article.
+6. Run the illustration review. If the decision is not `none`, follow [the illustration workflow](references/illustration-workflow.md).
+7. Strip workflow-only scaffolding from the publishable article while preserving the actual editorial judgment in prose.
+8. Run the self-review checklist before delivery.
+9. Verify the final output matches the Final Delivery Format section above.
 
 ## Article Modes
 
-### 1. 架构解读型
+| Mode       | Use When                           | Preferred Support              |
+| ---------- | ---------------------------------- | ------------------------------ |
+| 架构解读型 | 分析框架、协议、运行时、上下文机制 | Mermaid 架构图、机制图、对比表 |
+| 工具介绍型 | 介绍工具、插件、协议集成、上手流程 | 命令示例、配置片段、操作步骤   |
+| 方案实践型 | 讲真实项目如何落地某个能力或模式   | 代码片段、Prompt、流程图       |
+| 对比分析型 | 做框架、协议、方案、实现路径取舍   | 对比表、差异清单、选型建议     |
+
+## Style Calibration For This Blog
 
-**适用场景：**
+- Write like an engineer explaining why something matters now, not like a training handout exhaustively covering a topic.
+- State the article's judgment early. The introduction should quickly move from topic setup to a clear stance or tension.
+- Prefer direct causal claims and concrete tradeoffs over balanced-but-generic summaries.
+- Keep an identifiable author voice. The article should sound like someone who has a view, not like a system compiling background material.
+- Let paragraphs vary in rhythm. Short emphatic paragraphs are fine when they sharpen the point.
+- Section titles should read like real blog headings, not slide bullets, FAQ placeholders, or report headings.
+
+## Voice And Language Texture
+
+Write in a warm, direct, slightly opinionated Chinese technical-blog voice. The prose should have a human pulse: some sentences can be short, some can carry a longer chain of reasoning, and the author is allowed to say "我倾向于", "我不太相信", "这里真正麻烦的是", "这也是我更看重它的原因" when that makes the judgment clearer.
 
-- 解读 AI / Agent 框架、协议、运行时、上下文机制
+Avoid stiff connective tissue that makes the article sound generated or overly academic. In particular, do not lean on phrases such as:
 
-**推荐结构：**
+- "自然是", "自然地", "自然的"
+- "显而易见", "毋庸置疑", "不可否认"
+- "值得注意的是", "需要指出的是", "从某种意义上说"
+- "综上所述", "总而言之", "由此可见"
+- "本文将从三个方面", "接下来我们将", "在当今时代背景下"
 
-1. 为什么要关注这个主题
-2. 它到底解决什么问题
-3. 核心架构或关键机制
-4. 设计取舍与替代方案
-5. 总结与适用边界
+Replace them with concrete judgment, cause, or scene-setting:
 
-**优先材料：**
+| Stiff                                          | Better                                                         |
+| ---------------------------------------------- | -------------------------------------------------------------- |
+| "这自然是 Agent 发展的关键一步。"              | "这一步关键，是因为它把经验从一次性上下文里拎了出来。"         |
+| "值得注意的是，记忆系统并不等同于向量数据库。" | "这里最容易误判的一点是：记忆系统不是换个名字的向量数据库。"   |
+| "综上所述，微调和记忆各有优势。"               | "真正的取舍不在于谁更先进，而在于你要沉淀的是能力，还是经验。" |
+| "本文将从架构、实践和风险三个方面展开。"       | "我会先把问题拆开，再看这些系统到底把经验放在了哪里。"         |
 
-- Mermaid 架构图
-- 机制说明图
-- 对比表格
+Prefer sentences that answer "why this matters" over sentences that merely connect sections. If a transition can be deleted without losing meaning, delete it.
 
-### 2. 工具介绍与上手型
+Avoid these patterns unless they are genuinely needed:
 
-**适用场景：**
+- overly symmetrical three-part or four-part breakdowns just because they sound complete
+- recap-heavy transitions that restate what the reader already understood
+- generic "标准答案腔" phrasing such as abstract summaries that could fit any article with minimal edits
+- repetitive sentence scaffolds like "第一/第二/第三" when the section is not inherently list-shaped
+- definitions that arrive too late and merely restate what the previous paragraphs already established
+- conclusions that only summarize sections instead of sharpening the final judgment
+- decorative certainty words such as "自然", "显然", "无疑", "毋庸置疑" when they do not add evidence
+- polite filler transitions such as "值得注意的是", "需要指出的是", "综上所述" when a sharper claim would work better
 
-- 介绍 AI 工具、插件、协议集成方式或新工作流
+## Readability And Jargon Control
 
-**推荐结构：**
+Keep the article technically deep, but do not make readers pay an unnecessary terminology tax. When a paragraph contains multiple English terms, framework labels, or research phrases, slow down and translate the important ones into plain Chinese before moving on.
 
-1. 这类工具为什么值得写
-2. 工具是什么，解决什么问题
-3. 如何快速上手
-4. 实际使用体验与限制
-5. 总结与建议
+Default rule: if a reader can understand the idea without the English term, use Chinese. If the English term is useful for search or citation, keep it once in parentheses after a clear Chinese explanation, then use the Chinese phrase afterwards.
 
-**优先材料：**
+Prefer concrete scenes and actions over abstract labels:
 
-- 命令示例
-- 配置片段
-- 操作步骤
+| Hard To Read                                     | Clearer                                                        |
+| ------------------------------------------------ | -------------------------------------------------------------- |
+| "失败只留在 transcript 里，下一次要靠检索碰运气" | "失败只躺在聊天记录里，下次能不能想起来就要看运气"             |
+| "test-time learning"                             | "运行时学习，也就是部署以后在同一个任务里越做越好"             |
+| "temporal context graph"                         | "带时间的关系图：事实什么时候开始有效、什么时候被新事实覆盖"   |
+| "episode provenance"                             | "这条记忆最早来自哪段原始记录"                                 |
+| "canonical memory"                               | "被确认过、可以长期使用的可信记忆"                             |
+| "embedding cache、reranker、memory backend"      | "检索索引、结果排序、记忆后端；除非机制本身是重点，否则少展开" |
 
-### 3. 方案实践与实现型
+Use examples to lower the reading threshold. A technical claim becomes easier to follow when it is tied to a small scene:
 
-**适用场景：**
+- Instead of only saying "程序性记忆会改写 Agent 行为", add a concrete case such as "这个仓库跑端到端测试前要先启动模拟服务".
+- Instead of only saying "上下文窗口缺少治理语义", explain that it cannot decide which fact expired, which preference is temporary, and which rule has been reviewed by a human.
+- Instead of only saying "记忆需要可审计", say what should be auditable: source, scope, reviewer, effective time, and deletion path.
 
-- 讲怎么把某个 AI 能力、架构模式或工具真正落地到项目里
+Before final delivery, sweep the article for dense terms such as `transcript`, `benchmark`, `workspace id`, `prompt`, `fine-tuning`, `test-time learning`, `temporal context graph`, `validity window`, `episode`, `supersede`, `embedding`, `reranker`, `canonical`, `profile`, `review queue`, `memory backend`, and `agentic configuration`. Translate, explain, or remove each one unless it is truly needed for source accuracy.
 
-**推荐结构：**
+## Writing Rules
 
-1. 项目背景与目标
-2. 方案设计
-3. 核心实现
-4. 优化点、坑点与边界
-5. 总结
+- Start with why this topic is worth writing now before defining terms.
+- Move to the core judgment early; do not spend too long circling the topic before saying what the article actually thinks.
+- Define the central concept early in plain language, then keep reconnecting later sections to it.
+- Make each major section explain at least two of: the problem, the design reason, the benefit or cost.
+- Prefer question-driven or explanation-driven section titles.
+- Prefer titles that sound like a human blog writer's framing, not a textbook chapter heading.
+- Treat code and prompts as evidence; always explain what they prove.
+- Prefer assertive prose over over-buffered phrasing. If a point is clear, say it cleanly.
+- Cut any sentence that only exists to make the article sound more "complete" without adding meaning.
+- Avoid the rhythm of "raise concept -> define concept -> summarize concept" unless the topic truly needs that pacing.
+- Avoid introducing a key phrase repeatedly without explaining how it connects to the article's main question.
+- Avoid hype language such as “终极指南”, “颠覆式”, “革命性”.
+- End with a synthesized judgment, not a flat recap.
+- When tempted to write "自然是/显然/值得注意的是", replace it with the concrete reason, failure mode, or tradeoff behind the claim.
+- When a sentence only makes sense to readers who already know the English term, rewrite it around a concrete Chinese explanation or example.
 
-**优先材料：**
+## Depth Standard
 
-- 代码片段
-- Prompt 片段
-- Mermaid 流程图
+- Default to a long-form article unless the user asks for a shorter format.
+- The introduction should normally contain at least two substantive paragraphs.
+- Those opening paragraphs should establish both the problem and the author's stance, not just background and taxonomy.
+- The body should normally contain at least three developed top-level sections.
+- Prefer deeper reasoning over adding more headings.
+- Avoid list-only sections except for comparisons, checklists, or final recommendations.
 
-### 4. 对比分析与选型型
+## Structure and Material Selection
 
-**适用场景：**
+### Diagrams and Tables
 
-- 对多个框架、协议、方案或实现路径做取舍分析
+Use Mermaid when the reader needs to see structure, flow, or state.
 
-**推荐结构：**
+| Need               | Preferred Format         |
+| ------------------ | ------------------------ |
+| 系统全景或模块关系 | `graph TB`               |
+| 执行流程或调用链   | `graph LR` or `graph TD` |
+| 状态变化           | `stateDiagram-v2`        |
+| 类或接口关系       | `classDiagram`           |
 
-1. 对比问题是什么
-2. 评价维度
-3. 逐项对比
-4. 适用场景与选型建议
-5. 总结
+Prefer tables for comparisons, tradeoffs, evolution, capability matrices, and selection guidance.
 
-**优先材料：**
+Do not add Mermaid just for form. If a simple comparison can be expressed in a table, use the table.
 
-- 对比表格
-- 关键差异清单
+### Code and Prompt Usage
 
-## Transition Note
+- Only include the key excerpt that supports the argument.
+- Explain the mechanism or tradeoff after every excerpt.
+- Prefer a small, representative snippet over a large dump.
 
-上半部分用于决定这篇文章该怎么写：先判断写作目标、文章模式和材料组织方式。
+### Reusable Assets
 
-下半部分用于指导具体怎么写：包括正文风格、图表与表格使用、可复用段落模板，以及成稿前的自检要求。
+- Use [the article scaffold](references/article-template.md) when starting from zero.
+- Use [the illustration workflow](references/illustration-workflow.md) when images are required.
+- For article covers, prefer a horizontal tech-blog banner direction instead of a generic conceptual poster.
+- Use `scripts/aliyun_image_gen.py` for image generation. When OSS environment variables are already available in the shell, prefer its built-in `--upload-to-oss` flow so generation, upload, and remote URL collection happen in one command.
+- Use `scripts/upload_to_s3.py` as a manual fallback when images already exist locally and only the upload step needs to be rerun.
+- Use [the image API reference](references/aliyun-image-gen-api-reference.md) only when low-level image generation details are needed.
 
-## Core Style Rules
+## Illustration Review
 
-1. **先讲为什么写，再讲它是什么**
-   - 开篇先交代背景、动机、问题或观察。
-   - 不要一上来堆定义。
-2. **解释 why，不只罗列 what**
-   - 每个重点段落尽量回答：解决什么问题、为什么这样设计、代价是什么。
-3. **章节标题要回答真实问题**
-   - 优先使用解释型、问题型标题，例如“X 到底是什么？”、“Y 的原理和优化方法”。
-4. **代码和 Prompt 是论证材料**
-   - 只贴能支撑结论的关键片段。
-   - 贴完必须解释，不要贴完就结束。
-5. **保持专业、解释性强、带判断的语气**
-   - 可以有个人判断，但不要营销化或夸张化。
-6. **结尾必须有综合判断**
-   - 总结里至少补一层：适用边界、推荐场景、取舍或未来方向。
-
-## Long-Form Depth Requirements
-
-默认把文章写成“深入分析型长文”，除非用户明确要求短文、提纲或摘要。
-
-### 长度与展开原则
-
-- 开篇不只写一句背景，通常至少写 2 段，先交代写作动机，再点出核心问题。
-- 主体至少应有 3 个真正展开的一级章节，不要只有松散的小节拼接。
-- 每个一级章节默认写成 2-4 段完整论述，而不是一句判断加一个列表。
-- 如果主题本身复杂，优先增加分析深度，而不是增加空洞小标题。
-
-### 每个重点章节至少回答的问题
-
-每个重点章节尽量覆盖以下 3 类问题中的至少 2 类：
-
-1. 它到底在解决什么问题
-2. 为什么会这样设计或这样演进
-3. 它带来的收益、代价或边界是什么
-
-### 让文章更深入的具体方法
-
-- 解释机制时，补一层“为什么不是别的设计”。
-- 讲实践时，补一层“为什么这样落地，而不是只给步骤”。
-- 做对比时，补一层“不同选择背后的系统代价”。
-- 下结论时，补一层“适合谁、不适合谁、在什么条件下成立”。
-
-### 避免文章写短的常见问题
-
-- 不要用 5-7 个一级标题，每节只写 2-3 句。
-- 不要用项目符号代替完整分析，除非在做对比、清单或总结。
-- 不要把“定义 + 优势 + 总结”当成一篇完整博客。
-- 如果一个章节只是在复述资料，说明还缺少判断、机制拆解或边界分析。
-
-## Diagram and Table Policy
-
-### 优先使用 Mermaid 的情况
-
-| 场景 | 推荐图类型 |
-|------|------------|
-| 系统全景或模块关系 | `graph TB` |
-| 执行流程或调用链 | `graph LR` / `graph TD` |
-| 状态变化 | `stateDiagram-v2` |
-| 类或接口关系 | `classDiagram` |
-
-### 优先使用表格的情况
-
-- 框架对比
-- 方案取舍
-- 技术演进
-- 能力矩阵
-- 选型建议
-
-### 不要强制加图
-
-- 如果文字已经足够清楚，不要为了形式添加 Mermaid。
-- 如果内容是简单对比，优先使用表格而不是画图。
-- 不要求文章顶部必须出现架构图。
-
-### Mermaid 常用示例
-
-```mermaid
-graph TB
-    A[用户请求] --> B[Agent Runtime]
-    B --> C[Tool Layer]
-    C --> D[External Services]
-```
-
-```mermaid
-stateDiagram-v2
-    [*] --> Idle
-    Idle --> Running : invoke
-    Running --> Success : done
-    Running --> Failed : error
-```
-
-## Optional AI Architect Lens
-
-当文章偏架构分析时，可以补充以下视角，但不是每节强制要求：
-
-1. 设计哲学：为什么这样设计
-2. 核心收益：获得了什么
-3. 代价与边界：牺牲了什么
-4. 扩展性：是否支持后续演进
-5. 替代方案：为什么没有采用其他实现
-
-## Reusable Section Templates
-
-### 开篇模板
-
-````markdown
-## 为什么写这篇文章
-
-[行业讨论 / 项目背景 / 实际问题]
-
-这篇文章想回答的问题是：[一句话写清核心问题]
-
-[再补一段，说明为什么这个问题现在值得被重新讨论]
-````
-
-### 核心机制模板
-
-````markdown
-## 核心机制
-
-[先说明机制是什么]
-
-[再解释为什么这样设计]
-
-[最后补充它解决了什么问题]
-
-[如果机制存在明显代价，再补一段说明它的边界或替代方案]
-````
-
-### 实践示例模板
-
-````markdown
-## 实践示例
-
-下面用一个最小示例说明它在真实项目中如何使用：
-
-```ts
-// 关键代码片段
-```
-
-这段代码真正体现的是：[一句话解释它说明了什么]
-
-[再补一段，解释为什么这样写，而不是只展示结果]
-````
-
-### 对比分析模板
-
-````markdown
-## 对比与取舍
-
-| 维度 | 方案 A | 方案 B |
-|------|--------|--------|
-| 适用场景 | [方案 A 典型场景] | [方案 B 典型场景] |
-| 优势 | [方案 A 的核心优势] | [方案 B 的核心优势] |
-| 代价 | [方案 A 的主要代价] | [方案 B 的主要代价] |
-
-[表格之后必须补一段解释：真正决定选型的不是功能点多少，而是哪类成本和边界更适合当前问题]
-````
-
-### 可选场景模板
-
-````markdown
-**场景：[具体场景]**
-
-**问题：** [该场景下真正的问题]
-
-**解决方式：** [系统或方案如何处理]
-
-**效果：** [最终带来的收益或代价]
-````
-
-### 总结模板
-
-````markdown
-## 总结
-
-- 核心判断：[用一句话提炼文章结论]
-- 适用边界：[说明适合什么场景，不适合什么场景]
-- 进一步实践建议：[给出下一步建议]
-
-[如果主题仍在快速演进，再补一段说明接下来最值得继续观察的问题]
-````
-
-## Reference Requirements
-
-如果文章基于外部资料、文档、源码、博客或研究内容，必须在文末保留原始链接，统一放在 `## 参考资料` 小节。
+Before delivery, always make an illustration decision in your workflow notes:
 
 ```markdown
-## 参考资料
+## Illustration Decision
 
-- [Source Name](https://example.com/source-url)
-- [Another Source](https://example.com/another-url)
+- decision: none | cover-only | cover-and-sections
+- rationale: [why this article does or does not need images]
 ```
 
-不要为了让文章“更干净”而移除来源链接。
+This block is a workflow artifact. Do not insert it into the final publishable blog Markdown unless the user explicitly requests the decision log to remain visible.
+
+Use `none` when Mermaid and tables already carry the information or when extra images would be decorative noise.
+
+Use `cover-only` when the article is long or abstract enough to benefit from a single thesis-aligned cover image.
+
+For `cover-only`, default to a clean tech-blog banner treatment rather than an open-ended illustration: strong editorial composition, restrained abstract tech motifs, high contrast, no embedded text, and a warm orange accent close to `#ef7070` when it fits the topic.
+
+Use `cover-and-sections` only when the article is long and has multiple strong conceptual transitions that benefit from visual pacing.
+
+If the decision is not `none`:
+
+1. Produce a full brief and generation plan from [the illustration workflow](references/illustration-workflow.md).
+2. Generate the images.
+3. If OSS upload is configured and upload succeeds, rewrite Markdown with the returned public URLs; otherwise use local `/static/...` paths.
+4. If generation or upload fails, record the real blocker.
+
+Do not claim the article is fully illustrated if image generation failed, assets were not saved, or Markdown references were not inserted.
+
+## Source and Accuracy Rules
+
+- Keep original source links in a `## 参考资料` section.
+- Verify every cited link resolves to the material actually referenced.
+- Prefer stable original URLs over search pages, redirectors, or tracking links.
+- If a source is versioned or fast-moving, state the relevant version, date, or context.
+- Do not remove sources just to make the article look cleaner.
+
+## Repo-Specific Publishing Conventions
+
+- Use the frontmatter `title` as the article title. Do not add a duplicate H1 in the body.
+- Keep Markdown table separator rows in the `| --- | --- |` style.
+
+## Quick Output Templates
+
+### Working-note thesis
+
+```markdown
+- core_thesis: [一句话说明文章真正要证明的判断]
+```
+
+Use this as an internal drafting aid. In the final article, fold the thesis into the introduction and conclusion instead of leaving it as a standalone bullet.
+
+### Comparison close
+
+```markdown
+[真正决定选型的不是功能点数量，而是哪类成本、边界和团队条件更匹配当前问题。]
+```
+
+For fuller draft scaffolds and illustration templates, use [the article scaffold](references/article-template.md) and [the illustration workflow](references/illustration-workflow.md).
 
 ## Self-Review Checklist
 
-- [ ] 开篇是否说明了这篇文章为什么值得写
-- [ ] 是否围绕一个清晰的核心问题展开
-- [ ] 是否解释了设计原因与取舍，而不是只描述功能
-- [ ] 示例是否真的支撑了论点，并且有解释
-- [ ] 图表和表格是否是按需使用，而不是为了形式硬加
-- [ ] 结尾是否有综合判断、边界或建议
-- [ ] 是否保留了所有关键资料链接
-- [ ] 是否避免了“终极指南”“颠覆式”“革命性”这类营销化措辞
-- [ ] 是否存在明显过短的章节，导致文章像提纲而不是博客正文
-- [ ] 每个重点章节是否至少写清了问题、设计原因、收益/代价中的两项
+- [ ] 去 AI 味，写给人看，不是写给模型看
+- [ ] 没有使用“自然是/自然地/显然/值得注意的是/综上所述”等模板连接词来假装推进
+- [ ] 关键术语已经翻译成易懂中文；必要英文只在首次出现时作为补充
+- [ ] 难懂概念配了具体场景、失败例子或操作动作，而不是只堆抽象名词
+- [ ] 核心概念已经在前文用人话定义，并且后续章节持续回扣它
+- [ ] 只读每个标题后的第一句话，也能看出文章主线在递进而不是拼贴
+- [ ] 开篇先解释为什么值得写，而不是直接堆定义
+- [ ] 开头两三段里已经明确表达作者判断，而不只是铺背景
+- [ ] 全文围绕一个明确问题和一个明确判断展开
+- [ ] 每个重点章节至少解释了问题、设计原因、收益或代价中的两项
+- [ ] 示例真的支撑了论点，并且附带解释
+- [ ] Mermaid 和表格是按需使用，而不是为了形式硬加
+- [ ] 没有落回“讲义腔”“标准答案腔”或过度匀称的三段论节奏
+- [ ] 标题像博客标题，不像汇报提纲或课件小节
+- [ ] 已完成插画决策，且该决策不作为流程块暴露在发布稿里
+- [ ] 如果插画决策不是 `none`，已按 [illustration workflow](references/illustration-workflow.md) 生成图片或明确记录阻塞原因
+- [ ] 结尾给出了综合判断、边界或建议
+- [ ] 外部资料已保留在 `## 参考资料` 小节
+- [ ] 引用链接已逐条核对
+- [ ] 发布稿中不包含 `- core_thesis:`、`## Illustration Decision` 等过程性脚手架
