@@ -8,5 +8,9 @@ vendor
 .mypy_cache
 __pycache__/
 
-
+.hermes/
+.agents/
+.claudes/
 docs/superpowers/
+
+skills-lock.json

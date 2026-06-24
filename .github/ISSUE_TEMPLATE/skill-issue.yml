@@ -1,0 +1,44 @@
+name: Skill issue
+description: Report a problem with an existing skill
+title: "[skill]: "
+labels: ["skill"]
+body:
+  - type: input
+    id: skill
+    attributes:
+      label: Skill name
+      placeholder: dev-web
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What went wrong?
+      description: Describe the incorrect behavior, missing guidance, or broken script.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Install skill ...
+        2. Ask agent to ...
+        3. See error ...
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Agent environment
+      options:
+        - Cursor
+        - Claude Code
+        - Windsurf
+        - Other
+    validations:
+      required: true

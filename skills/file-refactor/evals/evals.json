@@ -1,0 +1,26 @@
+{
+  "skill_name": "file-refactor",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "src/screens/Dashboard/Dashboard.tsx is 1200 lines and needs to be reduced. Analyze it and extract: types to types.ts, utilities to utils.ts, hooks to hooks/, and sub-components to components/. Goal: get Dashboard.tsx under 600 lines while preserving all exports.",
+      "expected_output": "Dashboard.tsx significantly reduced with types.ts, utils.ts, hooks/, and components/ properly extracted; typecheck passes",
+      "files": [
+        "src/screens/Dashboard/Dashboard.tsx",
+        "src/screens/Dashboard/types.ts",
+        "src/screens/Dashboard/utils.ts"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "myapp/services/invoice.py is 850 lines with mixed concerns: dataclasses, format helpers, section builders, and a top-level render function. Split it following the Python strategy: models.py, invoice_format.py, invoice_sections.py, keeping invoice.py as a thin coordinator. Goal: invoice.py under 600 lines with tests still passing.",
+      "expected_output": "invoice.py reduced below 600 lines; extracted modules import cleanly; targeted tests pass",
+      "files": [
+        "myapp/services/invoice.py",
+        "myapp/services/models.py",
+        "myapp/services/invoice_format.py",
+        "myapp/services/invoice_sections.py"
+      ]
+    }
+  ]
+}

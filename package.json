@@ -1,14 +1,31 @@
 {
+  "name": "@yugasun/skills",
   "private": true,
   "type": "module",
   "version": "0.1.0",
+  "description": "Reusable Agent Skills for modern development and workflow automation",
   "packageManager": "pnpm@10.2.0",
   "license": "MIT",
   "author": "Yuga Sun <yugasun.ai@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yugasun/skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yugasun/skills/issues"
+  },
+  "homepage": "https://github.com/yugasun/skills#readme",
   "keywords": [
     "skills",
     "agent-skills",
     "agent",
-    "ai"
-  ]
+    "ai",
+    "cursor",
+    "claude"
+  ],
+  "scripts": {
+    "validate": "python3 skills/skill-creator/scripts/validate_all.py",
+    "validate:one": "python3 skills/skill-creator/scripts/quick_validate.py",
+    "test": "python3 skills/skill-creator/scripts/run_skill_tests.py"
+  }
 }

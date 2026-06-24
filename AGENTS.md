@@ -8,6 +8,7 @@ This repository publishes reusable agent skills. Most changes should stay local 
 - The skill catalog lives in [docs/available-skills.md](docs/available-skills.md).
 - The minimal new-skill template is [template/SKILL.md](template/SKILL.md).
 - The spec pointer is [spec/agent-skills-spec.md](spec/agent-skills-spec.md).
+- Human contributor guidance is in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Working Model
 
@@ -26,29 +27,31 @@ This repository publishes reusable agent skills. Most changes should stay local 
 3. Keep `SKILL.md` concise. Put reference material in `references/` and link to it.
 4. If the skill has scripts or behavior worth regression coverage, add or update tests inside that skill folder.
 5. Update [docs/available-skills.md](docs/available-skills.md) when a skill is added, removed, or its positioning materially changes.
-6. Leave [README.md](README.md) alone unless project-level positioning, installation, or top-level navigation changed.
+6. Leave [README.md](README.md) and [README.zh-CN.md](README.zh-CN.md) alone unless project-level positioning, installation, or top-level navigation changed.
 
 ## Validation Commands
 
 Run from the repo root:
 
 ```bash
+pip install -r requirements-dev.txt
 python skills/skill-creator/scripts/quick_validate.py skills/<skill-name>
+python skills/skill-creator/scripts/validate_all.py
 python skills/skill-creator/scripts/package_skill.py skills/<skill-name> ./dist
 ```
 
 If the target skill includes tests, run the narrowest relevant test command as well, for example:
 
 ```bash
-pytest skills/<skill-name>/tests
+python skills/skill-creator/scripts/run_skill_tests.py
 ```
 
 ## Useful Local Examples
 
-- [skills/blog-writer/SKILL.md](skills/blog-writer/SKILL.md): minimal instruction-only skill.
-- [skills/dev-web/SKILL.md](skills/dev-web/SKILL.md): skill with linked references.
+- [skills/ai-news-collector/SKILL.md](skills/ai-news-collector/SKILL.md): minimal instruction-only skill.
+- [skills/dev-web/SKILL.md](skills/dev-web/SKILL.md): skill with linked references and metadata.
 - [skills/aliyun-image-gen/SKILL.md](skills/aliyun-image-gen/SKILL.md): skill with scripts and tests.
-- [skills/slides/](skills/slides): skill with bundled templates and themes.
+- [skills/brainstorming/SKILL.md](skills/brainstorming/SKILL.md): workflow-heavy skill with bundled scripts.
 
 ## Pitfalls To Avoid
 
