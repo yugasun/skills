@@ -24,6 +24,7 @@ Update this file when a skill is added, removed, or its positioning changes. Kee
 | Skill | Focus | Best For | Entry |
 | --- | --- | --- | --- |
 | `ai-news-collector` | AI industry news collection and digests | Daily AI news, trend tracking, and topic summaries | [skills/ai-news-collector/SKILL.md](../skills/ai-news-collector/SKILL.md) |
+| `baidu-search` | Web search using Baidu AI Search Engine | Live information, documentation, or research topics | [skills/baidu-search/SKILL.md](../skills/baidu-search/SKILL.md) |
 | `tavily` | AI-friendly web search | Time-sensitive research, fact checking, and source aggregation | [skills/tavily/SKILL.md](../skills/tavily/SKILL.md) |
 
 ## Presentation And Delivery
