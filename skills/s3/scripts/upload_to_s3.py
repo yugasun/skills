@@ -42,6 +42,9 @@ def upload_to_s3(local_folder, bucket_name, s3_prefix='', endpoint_url=None, add
         config_kwargs['s3']['addressing_style'] = addressing_style
     if signature_version:
         config_kwargs['signature_version'] = signature_version
+    # Disable chunked payload trailer checksum for S3-compatible providers (e.g. Aliyun OSS)
+    config_kwargs['request_checksum_calculation'] = 'when_required'
+    config_kwargs['response_checksum_validation'] = 'when_required'
     
     if config_kwargs:
         s3_kwargs['config'] = Config(**config_kwargs)
