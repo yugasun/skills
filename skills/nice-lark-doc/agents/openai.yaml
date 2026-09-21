@@ -1,0 +1,8 @@
+interface:
+  display_name: "Nice Lark Doc"
+  short_description: "让飞书文档变得美观、专业、易读"
+  default_prompt: "Use $nice-lark-doc to create a beautifully formatted Lark document. First run: bash ~/.agents/skills/nice-lark-doc/scripts/setup.sh"
+  brand_color: "#0050E0"
+
+policy:
+  allow_implicit_invocation: true

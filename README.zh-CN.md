@@ -38,8 +38,23 @@ CLI 用法见 [vercel-labs/skills](https://github.com/vercel-labs/skills)。
 | 开发 | `dev-web`、`dev-server`、`file-refactor`、`skill-creator` |
 | 规划 | `brainstorming` |
 | 研究 | `ai-news-collector`、`tavily` |
-| 交付 | `html-to-pdf`、`s3` |
+| 交付 | `html-to-pdf`、**`nice-lark-doc`**、`s3` |
 | 媒体 | `aliyun-image-gen` |
+
+## 精选技能：`nice-lark-doc`
+
+> [!TIP]
+> **把朴素的飞书文档变成专业、易读的成品。** `nice-lark-doc` 对内容做 5 维度评分，匹配 **6 种风格配方（Recipe）**，再用画板（SVG / Mermaid）、表格、Callout、Checkbox 渲染出结构清晰的飞书文档，并通过视觉节奏规则确保「文字墙」不会出现。
+
+核心亮点：
+
+- **6 种风格配方，按意图匹配** —— 素雅编辑、技术严谨、产品叙事、行动导向、数据密集、演示风格。
+- **画板优先**：架构 / 流程 / 关系 → SVG 画板；时序 / 类图 / 饼图 / 甘特图 → Mermaid；画板会解析为可编辑的飞书节点。
+- **反文字墙规则**：连续纯文本不超过 3 段，各配方视觉元素占比 20%–60%，配色遵循对比度铁律。
+- **美化现有文档**：直接给飞书文档 URL，自动诊断 → 重新匹配配方 → 渲染，不删减原文信息。
+- 基于飞书 CLI（`lark-doc` / `lark-whiteboard` / `lark-drive`）；首次使用运行 `bash scripts/setup.sh`。
+
+入口：[`skills/nice-lark-doc/SKILL.md`](skills/nice-lark-doc/SKILL.md)
 
 ## 仓库结构
 

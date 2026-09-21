@@ -32,6 +32,7 @@ Update this file when a skill is added, removed, or its positioning changes. Kee
 | Skill | Focus | Best For | Entry |
 | --- | --- | --- | --- |
 | `html-to-pdf` | Playwright-based HTML to PDF export | Exporting web pages, slides, or local HTML to PDF | [skills/html-to-pdf/SKILL.md](../skills/html-to-pdf/SKILL.md) |
+| `nice-lark-doc` | Lark (Feishu) document beautification with 6 style recipes | Creating or polishing Lark docs with whiteboards, tables, and callouts | [skills/nice-lark-doc/SKILL.md](../skills/nice-lark-doc/SKILL.md) |
 | `s3` | S3 / OSS object storage upload | Publishing static sites, slides, or exported files | [skills/s3/SKILL.md](../skills/s3/SKILL.md) |
 
 ## Media And Utilities

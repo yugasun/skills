@@ -1,0 +1,237 @@
+{
+  "schema_version": 2,
+  "visual_density_rules": {
+    "max_consecutive_text_paragraphs": "连续纯文本段落上限，超过必须插入视觉元素",
+    "min_visual_ratio": "视觉元素（画板+表格+callout）占全部 blocks 的最低比例",
+    "visual_elements": [
+      "whiteboard",
+      "table",
+      "callout",
+      "checkbox",
+      "list"
+    ]
+  },
+  "recipes": [
+    {
+      "slug": "editorial-clean",
+      "name": "素雅编辑",
+      "tagline": "安静、克制的长文风格，段落优先但仍保持视觉节奏",
+      "mood": [
+        "安静",
+        "文学感",
+        "克制",
+        "沉稳"
+      ],
+      "occasion": [
+        "深度分析",
+        "研究报告",
+        "知识沉淀",
+        "技术思考"
+      ],
+      "tone": [
+        "理性",
+        "内敛",
+        "叙述性强"
+      ],
+      "formality": "medium-high",
+      "density": "high",
+      "max_consecutive_text": 3,
+      "min_visual_ratio": 0.2,
+      "visual_per_h2": {
+        "table": "0-1",
+        "whiteboard": "1",
+        "callout": "0-1"
+      },
+      "best_for": "需要读者沉浸阅读、逐段理解的内容",
+      "avoid_for": "需要快速扫描、行动导向、数据对比的场景",
+      "color_mode": "单色渐变"
+    },
+    {
+      "slug": "tech-structured",
+      "name": "技术严谨",
+      "tagline": "结构化、层次分明、画板和表格辅助理解",
+      "mood": [
+        "专业",
+        "严谨",
+        "逻辑清晰",
+        "精确"
+      ],
+      "occasion": [
+        "技术方案",
+        "架构设计",
+        "API文档",
+        "技术评审"
+      ],
+      "tone": [
+        "理性",
+        "数据导向",
+        "层次分明"
+      ],
+      "formality": "medium-high",
+      "density": "high",
+      "max_consecutive_text": 3,
+      "min_visual_ratio": 0.3,
+      "visual_per_h2": {
+        "table": "1+",
+        "whiteboard": "1+",
+        "callout": "1-2"
+      },
+      "best_for": "技术团队内部评审、需要精确定义的技术内容",
+      "avoid_for": "面向非技术受众、需要情感共鸣的内容",
+      "color_mode": "单色渐变 / 双色对比"
+    },
+    {
+      "slug": "product-visual",
+      "name": "产品叙事",
+      "tagline": "视觉化表达为主，用户故事驱动，画板丰富",
+      "mood": [
+        "活泼",
+        "直观",
+        "用户导向",
+        "有感染力"
+      ],
+      "occasion": [
+        "产品方案",
+        "需求评审",
+        "功能介绍",
+        "用户调研"
+      ],
+      "tone": [
+        "感性",
+        "视觉化",
+        "故事性强"
+      ],
+      "formality": "medium",
+      "density": "medium",
+      "max_consecutive_text": 2,
+      "min_visual_ratio": 0.4,
+      "visual_per_h2": {
+        "table": "1",
+        "whiteboard": "1-2",
+        "callout": "1-2"
+      },
+      "best_for": "需要跨团队沟通、让非技术人员快速理解的产品内容",
+      "avoid_for": "纯技术细节、不需要图示的内容",
+      "color_mode": "双色对比 / 多层分级"
+    },
+    {
+      "slug": "action-oriented",
+      "name": "行动导向",
+      "tagline": "紧凑、可执行，checkbox 和表格为主",
+      "mood": [
+        "紧凑",
+        "高效",
+        "务实",
+        "快节奏"
+      ],
+      "occasion": [
+        "会议纪要",
+        "Sprint计划",
+        "周报",
+        "工作交接"
+      ],
+      "tone": [
+        "务实",
+        "简洁",
+        "执行导向"
+      ],
+      "formality": "low-medium",
+      "density": "medium",
+      "max_consecutive_text": 2,
+      "min_visual_ratio": 0.3,
+      "visual_per_h2": {
+        "table": "1+",
+        "whiteboard": "0-1",
+        "callout": "1-2",
+        "checkbox": "大量"
+      },
+      "best_for": "需要快速产出行动项、追踪进度的工作文档",
+      "avoid_for": "需要深度分析、长文叙述的内容",
+      "color_mode": "单色渐变"
+    },
+    {
+      "slug": "data-dense",
+      "name": "数据密集",
+      "tagline": "表格主导、对比清晰、数据说话",
+      "mood": [
+        "精确",
+        "客观",
+        "对比性强",
+        "量化"
+      ],
+      "occasion": [
+        "复盘报告",
+        "竞品分析",
+        "项目总结",
+        "数据分析"
+      ],
+      "tone": [
+        "客观",
+        "量化",
+        "分析性强"
+      ],
+      "formality": "medium",
+      "density": "high",
+      "max_consecutive_text": 2,
+      "min_visual_ratio": 0.5,
+      "visual_per_h2": {
+        "table": "1-2",
+        "whiteboard": "0-1",
+        "callout": "1+"
+      },
+      "best_for": "需要多维度对比、用数据支撑结论的报告",
+      "avoid_for": "以叙述为主、不需要大量数据的内容",
+      "color_mode": "单色渐变"
+    },
+    {
+      "slug": "presentation",
+      "name": "演示风格",
+      "tagline": "大留白、视觉冲击、一屏一个核心观点",
+      "mood": [
+        "大气",
+        "有冲击力",
+        "简洁有力",
+        "高级感"
+      ],
+      "occasion": [
+        "对外演示",
+        "品牌介绍",
+        "方案宣讲",
+        "客户汇报"
+      ],
+      "tone": [
+        "大气",
+        "精炼",
+        "视觉冲击"
+      ],
+      "formality": "medium-high",
+      "density": "low",
+      "max_consecutive_text": 1,
+      "min_visual_ratio": 0.6,
+      "visual_per_h2": {
+        "table": "0-1",
+        "whiteboard": "1",
+        "callout": "0-1"
+      },
+      "best_for": "需要给外部受众留下深刻印象的展示型文档",
+      "avoid_for": "内部工作文档、需要详细记录的内容",
+      "color_mode": "单色渐变"
+    }
+  ],
+  "color_palette": {
+    "reference": "references/color-palette.md",
+    "core_family": "蓝色家族 #0050E0 → #60A0E0 → #93C5FD → #BFDBFE → #DBEAFE → #EFF6FF",
+    "auxiliary_family": "蓝灰家族 #0F172A → #1E293B → #334155 → #64748B → #94A3B8 → #CBD5E1 → #E2E8F0",
+    "neutrals": "灰阶 #404040 → #808080 → #C0C0C0 → #E0E0E0 → #FFFFFF",
+    "semantic_colors": {
+      "success": "#16A34A",
+      "warning": "#CA8A04",
+      "danger": "#DC2626"
+    },
+    "rules": [
+      "不用纯黑，用 #1E293B 替代",
+      "暖色仅小面积点缀（< 10%）",
+      "用明度变化代替色相变化"
+    ]
+  }
+}
