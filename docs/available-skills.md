@@ -18,6 +18,7 @@ Update this file when a skill is added, removed, or its positioning changes. Kee
 | Skill | Focus | Best For | Entry |
 | --- | --- | --- | --- |
 | `brainstorming` | Intent exploration and design-before-build | Any creative or implementation work that needs requirements and design approval first | [skills/brainstorming/SKILL.md](../skills/brainstorming/SKILL.md) |
+| `expert-craft` | Deeper task prompts without broader scope | Diagnosing expert actions, raw materials, specific methods and tools, and independent validation before rewriting a prompt | [skills/expert-craft/SKILL.md](../skills/expert-craft/SKILL.md) |
 
 ## Content And Research
 
