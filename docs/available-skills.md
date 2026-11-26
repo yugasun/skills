@@ -10,6 +10,7 @@ Update this file when a skill is added, removed, or its positioning changes. Kee
 | --- | --- | --- | --- |
 | `dev-web` | React 19 + Vite + Tailwind CSS 4 + shadcn/ui | Building modern frontends and UI | [skills/dev-web/SKILL.md](../skills/dev-web/SKILL.md) |
 | `dev-server` | FastAPI + uv + SQLAlchemy + AI libraries | Building Python backends, APIs, and AI services | [skills/dev-server/SKILL.md](../skills/dev-server/SKILL.md) |
+| `deploy-server` | SSH-based server deployment | Deploying or updating a local app or service on a server, including first-time SSH setup | [skills/deploy-server/SKILL.md](../skills/deploy-server/SKILL.md) |
 | `file-refactor` | Large-file splitting and module decoupling | Refactoring monolithic `.ts`/`.tsx`/`.py` files over ~600 lines | [skills/file-refactor/SKILL.md](../skills/file-refactor/SKILL.md) |
 | `skill-creator` | Skill design, scaffolding, and quality checks | Creating or maintaining agent skills | [skills/skill-creator/SKILL.md](../skills/skill-creator/SKILL.md) |
 
