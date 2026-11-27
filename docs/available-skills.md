@@ -42,6 +42,7 @@ Update this file when a skill is added, removed, or its positioning changes. Kee
 | Skill | Focus | Best For | Entry |
 | --- | --- | --- | --- |
 | `aliyun-image-gen` | Aliyun Bailian Qwen-Image text-to-image | Image generation, async polling, and temporary asset download | [skills/aliyun-image-gen/SKILL.md](../skills/aliyun-image-gen/SKILL.md) |
+| `claude-doctor` | Claude web, Desktop, Code and API troubleshooting | Diagnosing and repairing local installation, DNS, network and authentication failures on personal computers | [skills/claude-doctor/SKILL.md](../skills/claude-doctor/SKILL.md) |
 
 ## Update Rule
 
